@@ -1,0 +1,47 @@
+buckets:
+  - name: "my-example-bucket-001"
+    tags:
+      Environment: "dev"
+      Project: "example"
+    force_destroy: true
+    versioning:
+      status: "Enabled"
+    server_side_encryption_configuration:
+      rule:
+        apply_server_side_encryption_by_default:
+          sse_algorithm: "AES256"
+        bucket_key_enabled: true
+    public_access_block:
+      block_public_acls: true
+      block_public_policy: true
+      ignore_public_acls: true
+      restrict_public_buckets: true
+    lifecycle_rules:
+      - id: "expire-logs"
+        status: "Enabled"
+        filter:
+          prefix: "logs/"
+        expiration:
+          days: 90
+  
+  - name: "my-public-website-bucket-002"
+    tags:
+      Environment: "prod"
+      Project: "website"
+    website:
+      index_document: "index.html"
+      error_document: "error.html"
+    cors_rules:
+      - allowed_headers: ["*"]
+        allowed_methods: ["GET", "HEAD"]
+        allowed_origins: ["*"]
+        max_age_seconds: 3000
+    ownership_controls:
+      rule:
+        object_ownership: "BucketOwnerPreferred"
+    acl: "public-read"
+    public_access_block:
+      block_public_acls: false
+      block_public_policy: false
+      ignore_public_acls: false
+      restrict_public_buckets: false

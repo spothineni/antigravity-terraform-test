@@ -1,0 +1,78 @@
+s3_buckets:
+  app-data:
+    bucket_name: "myapp-data-bucket-2024"
+    enable_versioning: true
+    force_destroy: true
+    tags:
+      Environment: production
+      Application: myapp
+      ManagedBy: terraform
+    
+    encryption:
+      algorithm: "AES256"
+      bucket_key: true
+    
+    block_public_access:
+      block_public_acls: true
+      block_public_policy: true
+      ignore_public_acls: true
+      restrict_public_buckets: true
+    
+    lifecycle_rules:
+      - id: "cleanup-old-versions"
+        enabled: true
+        noncurrent_version_expiration_days: 90
+        noncurrent_transitions:
+          - days: 30
+            storage_class: "STANDARD_IA"
+          - days: 60
+            storage_class: "GLACIER"
+      
+      - id: "archive-logs"
+        enabled: true
+        prefix: "logs/"
+        expiration_days: 365
+        transitions:
+          - days: 30
+            storage_class: "STANDARD_IA"
+          - days: 90
+            storage_class: "GLACIER"
+
+  static-website:
+    bucket_name: "myapp-website-2024"
+    force_destroy: true
+    object_ownership: "BucketOwnerPreferred"
+    acl: "public-read"
+    tags:
+      Environment: production
+      Type: website
+    
+    block_public_access:
+      block_public_acls: false
+      block_public_policy: false
+      ignore_public_acls: false
+      restrict_public_buckets: false
+    
+    website:
+      index_document: "index.html"
+      error_document: "404.html"
+    
+    cors_rules:
+      - allowed_methods: ["GET", "HEAD"]
+        allowed_origins: ["https://example.com", "https://www.example.com"]
+        allowed_headers: ["*"]
+        max_age_seconds: 3600
+        expose_headers: ["ETag"]
+
+  logs-bucket:
+    bucket_name: "myapp-logs-2024"
+    force_destroy: true
+    object_ownership: "BucketOwnerEnforced"
+    tags:
+      Environment: production
+      Type: logs
+    
+    lifecycle_rules:
+      - id: "expire-old-logs"
+        enabled: true
+        expiration_days: 90
