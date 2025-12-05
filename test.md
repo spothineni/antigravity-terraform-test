@@ -1,7 +1,3 @@
-Here are **high-signal, code-focused prompts** you can use to **directly compare Windsurf self-hosted models vs Claude Sonnet 3.5** on real engineering tasks (Python, Terraform, Spark, AWS infra, debugging, optimization, etc.).
-These work extremely well because they expose *hallucinations, correctness gaps, and reasoning quality*.
-
----
 
 # ✅ **1. Databricks + Spark Code Comparison Prompt**
 
