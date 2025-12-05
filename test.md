@@ -46,7 +46,7 @@
 > * Valid IAM actions
 > * No hallucinated APIs
 
-This test shows **if Windsurf model hallucinates unsupported Bedrock APIs**, while Claude usually stays accurate.
+This test shows **if local model hallucinates unsupported Bedrock APIs**, while Claude usually stays accurate.
 
 ---
 
