@@ -229,4 +229,3 @@ This exposes **hallucination + architecture** differences.
 
 ---
 
-**→ Which self-hosted model you’re running (LLama 3.1? Mistral? Qwen? Custom LoRA?)**
