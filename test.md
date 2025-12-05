@@ -229,15 +229,4 @@ This exposes **hallucination + architecture** differences.
 
 ---
 
-# Want me to generate **automated scoring prompts** or **side-by-side evaluator scripts**?
-
-I can generate:
-
-✔ A JSON evaluation schema
-✔ A Python evaluator that sends prompts to both models and compares outputs
-✔ A Windsurf test harness for batch evaluation
-✔ A scoring rubric for correctness, hallucination, stability
-
-Just tell me:
-
 **→ Which self-hosted model you’re running (LLama 3.1? Mistral? Qwen? Custom LoRA?)**
